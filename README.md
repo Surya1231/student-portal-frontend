@@ -44,6 +44,7 @@ This is frontend of the student portal that is created using react.
 
 ## Directory structure
 
+```
 student-portal
 ┣ node_modules
 ┣ public
@@ -74,6 +75,7 @@ student-portal
 ┣ package-lock.json
 ┣ package.json
 ┗ README.md
+```
 
 ## Contrubution guidelines
 
