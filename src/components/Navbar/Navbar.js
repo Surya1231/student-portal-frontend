@@ -17,10 +17,10 @@ export default class Navbar extends Component {
     return (
       <>
         <div className="d-md-block d-none navbar-custom navbar-desktop">
-          <nav className="navbar navbar-expand-md navbar-light bg-light">
-            <a className="navbar-brand" href="#">
-              Navbar
-            </a>
+          <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+            <Link className="navbar-brand" to="/">
+              Student Portal
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -35,20 +35,19 @@ export default class Navbar extends Component {
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav">
                 <li className="nav-item active">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" to="/">
                     Home
-                    <span className="sr-only">(current)</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Features
-                  </a>
+                  <Link className="nav-link" to="/notes">
+                    Notes
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Pricing
-                  </a>
+                  <Link className="nav-link" to="/buysell">
+                    Buy/Sell
+                  </Link>
                 </li>
                 <li className="nav-item dropdown">
                   <a
@@ -59,17 +58,63 @@ export default class Navbar extends Component {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    Dropdown link
+                    Hostels
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a className="dropdown-item" href="#">
-                      Action
+                      Hostel 1
                     </a>
                     <a className="dropdown-item" href="#">
-                      Another action
+                      Hostel 2
                     </a>
                     <a className="dropdown-item" href="#">
-                      Something else here
+                      Hostel 3
+                    </a>
+                  </div>
+                </li>
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdownMenuLink"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Clubs
+                  </a>
+                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a className="dropdown-item" href="#">
+                      Hostel 1
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Hostel 2
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Hostel 3
+                    </a>
+                  </div>
+                </li>
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdownMenuLink"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    About
+                  </a>
+                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a className="dropdown-item" href="#">
+                      Developers
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Contributors
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Github Repo
                     </a>
                   </div>
                 </li>
