@@ -1,11 +1,10 @@
 import React from 'react';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <button type="button" className="btn btn-outline-primary">
-        Hello World
-      </button>
+      <Navbar />
     </div>
   );
 }
