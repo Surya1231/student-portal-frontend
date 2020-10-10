@@ -1,1 +1,17 @@
 @import './global.scss';
+
+.row {
+  margin: 0px;
+  padding: 0px;
+}
+
+.form-error {
+  color: rgb(199, 23, 23);
+  font-style: italic;
+  font-size: small;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
