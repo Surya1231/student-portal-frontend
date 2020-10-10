@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/scss/navbar.scss';
@@ -16,7 +17,7 @@ export default class Navbar extends Component {
     const pathname = '/about';
     return (
       <>
-        <div className="d-md-block d-none navbar-custom navbar-desktop">
+        <div className="d-md-block navbar-custom navbar-desktop">
           <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <Link className="navbar-brand" to="/">
               Student Portal
@@ -49,6 +50,7 @@ export default class Navbar extends Component {
                     Buy/Sell
                   </Link>
                 </li>
+
                 <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
@@ -123,7 +125,7 @@ export default class Navbar extends Component {
           </nav>
         </div>
 
-        <div className="d-md-none navbar-custom navbar-mobile">Mobile</div>
+        <div className="d-md-none navbar-custom navbar-mobile"> Mobile </div>
       </>
     );
   }

@@ -4,7 +4,7 @@ import Axios from 'axios';
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
 export const sendUserOtp = async (user) => {
-  const url = `${apiUrl}/senduserotp`;
+  const url = `${apiUrl}/sendUserOtp`;
   const res = await Axios.post(url, { user });
   return res;
 };
