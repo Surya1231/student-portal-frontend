@@ -1,1 +1,42 @@
 @import './global.scss';
+
+.row {
+  margin: 0px;
+  padding: 0px;
+}
+
+.form-error {
+  color: rgb(199, 23, 23);
+  font-style: italic;
+  font-size: small;
+}
+
+// Set the height of element ot remaining screen except navbar
+.height-rscreen {
+  min-height: 92vh;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+.display-table {
+  display: table;
+  width: 100%;
+}
+
+.display-cell {
+  display: table-cell;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.pos-center {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

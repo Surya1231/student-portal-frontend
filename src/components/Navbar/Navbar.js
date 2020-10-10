@@ -130,7 +130,7 @@ export default class Navbar extends Component {
           </nav>
         </div>
 
-        <div className="d-md-none navbar-custom navbar-mobile"> Mobile </div>
+        <div className="d-md-none navbar-custom navbar-mobile"> </div>
       </>
     );
   }

@@ -10,3 +10,11 @@ export const sendUserOtp = async (user) => {
 };
 
 export const login = async () => {};
+
+export const getNotesFromServer = async (subjectCode) => {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve({ success: true, notes: [1, 2, subjectCode], papers: [1, 2, 3] });
+    }, 5000),
+  );
+};
