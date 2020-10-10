@@ -11,7 +11,7 @@
     "jest": true
   },
   "rules": {
-    "max-len": ["error", { "code": 100 }],
+    "max-len": ["error", { "code": 200 }],
     "prefer-promise-reject-errors": ["off"],
     "react/jsx-filename-extension": ["off"],
     "react/prop-types": ["warn"],
@@ -19,6 +19,10 @@
     "react/no-unused-state": ["off"],
     "react/jsx-props-no-spreading": ["off"],
     "react/prefer-stateless-function": ["off"],
-    "import/prefer-default-export": ["off"]
+    "import/prefer-default-export": ["off"],
+    "indent": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "no-console": "off"
   }
 }
