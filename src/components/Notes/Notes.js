@@ -1,26 +1,39 @@
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { getNotesFromServer } from '../../server/server';
+import { updateRecentNotes } from '../../store/actions/notesAction';
+import { LoadingFadeIn } from '../common/Loading';
+import NotesDisplay from './NotesDisplay';
 import NotesForm from './NotesForm';
 
 class Notes extends Component {
   constructor(props) {
     super(props);
+    const { recent } = this.props;
 
     this.state = {
       error: null,
       loading: false,
-      branch: '',
-      semester: '',
-      subject: '',
+      branch: recent.branch || '',
+      semester: recent.semester || '',
+      subject: recent.subject || '',
       formErrors: {},
-      notesData: null,
+      notesData: recent.notesData || null,
     };
   }
 
   onInputChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    if (event.target.name !== 'subject')
+      this.setState({
+        [event.target.name]: event.target.value,
+        subject: '',
+      });
+    else
+      this.setState({
+        [event.target.name]: event.target.value,
+      });
   };
 
   getNotes = async () => {
@@ -37,6 +50,8 @@ class Notes extends Component {
       const data = res;
       const { success } = res;
       if (success) {
+        const { updateRecentNotes } = this.props;
+        updateRecentNotes({ branch, semester, subject, notesData: data });
         this.setState({ loading: false, notesData: data });
       } else {
         this.setState({ loading: false, error: 'There is some error' });
@@ -54,7 +69,7 @@ class Notes extends Component {
     return (
       <div className="notes">
         <div className="row">
-          <div className="col-md-3 border-right px-4 py-3">
+          <div className="col-md-3 px-4 py-3">
             <NotesForm
               branch={branch}
               semester={semester}
@@ -65,11 +80,15 @@ class Notes extends Component {
               disabled={loading}
             />
           </div>
-          <div className="col-md-9">
+          <div className="col-md-9 height-rscreen border-left">
             {!notesData && !loading && !error && 'Initial Stage'}
-            {loading && 'Loading Here'}
+            {loading && (
+              <div className="pos-center">
+                <LoadingFadeIn />
+              </div>
+            )}
             {error && 'Error Here'}
-            {notesData && !loading && !error && 'Data Here'}
+            {notesData && !loading && !error && <NotesDisplay />}
           </div>
         </div>
       </div>
@@ -77,4 +96,12 @@ class Notes extends Component {
   }
 }
 
-export default Notes;
+const mapStateToProps = (state) => ({
+  recent: state.notes && state.notes.recent,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateRecentNotes: (payload) => dispatch(updateRecentNotes(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notes);

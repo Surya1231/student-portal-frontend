@@ -22,7 +22,7 @@ class NotesForm extends Component {
     const { onInputChange } = this.props;
     return (
       <div>
-        <h5> ONE STOP PORTAL FOR NOTES </h5>
+        <h5 className="text-primary"> ONE STOP PORTAL FOR NOTES </h5>
         <br />
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
