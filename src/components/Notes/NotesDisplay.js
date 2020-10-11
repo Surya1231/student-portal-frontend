@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
+import { FcPlus } from 'react-icons/fc';
+import { AiFillMinusCircle } from 'react-icons/ai';
 import { ErrorMessage } from '../common/Common';
 import NotesBox from './NotesBox';
 
@@ -34,7 +35,15 @@ class NotesDisplay extends Component {
             className="h4 border-bottom py-2 cursor-pointer"
             onClick={() => this.toggle('showNotes')}
           >
-            <span className="float-right">{showNotes ? '^' : 'D'}</span>
+            <span className="float-right">
+              {showNotes ? (
+                <span className="text-danger">
+                  <AiFillMinusCircle />
+                </span>
+              ) : (
+                <FcPlus />
+              )}
+            </span>
             Notes
           </div>
           {showNotes && (
@@ -54,7 +63,15 @@ class NotesDisplay extends Component {
             className="h4 border-bottom py-2 cursor-pointer"
             onClick={() => this.toggle('showLastYearQuestions')}
           >
-            <span className="float-right">{showLastYearQuestions ? '^' : 'D'}</span>
+            <span className="float-right">
+              {showLastYearQuestions ? (
+                <span className="text-danger">
+                  <AiFillMinusCircle />
+                </span>
+              ) : (
+                <FcPlus />
+              )}
+            </span>
             Last year Questions
           </div>
           {showLastYearQuestions && (
@@ -74,7 +91,15 @@ class NotesDisplay extends Component {
             className="h4 border-bottom py-2 cursor-pointer"
             onClick={() => this.toggle('showImportantLinks')}
           >
-            <span className="float-right">{showImportantLinks ? '^' : 'D'}</span>
+            <span className="float-right">
+              {showImportantLinks ? (
+                <span className="text-danger">
+                  <AiFillMinusCircle />
+                </span>
+              ) : (
+                <FcPlus />
+              )}
+            </span>
             Important Links
           </div>
           {showImportantLinks && (

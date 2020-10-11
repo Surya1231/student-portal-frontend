@@ -112,7 +112,7 @@ class Notes extends Component {
             />
             <hr />
           </div>
-          <div className="col-md-9 height-rscreen border-left">
+          <div className="col-md-9 height-rscreen border-left bg-light">
             {!notesData && !loading && !error && 'Initial Stage'}
             {loading && (
               <div className="pos-center">
