@@ -50,7 +50,7 @@ class Notes extends Component {
     resetRecentNotes();
   };
 
-  getNotes = async () => {
+  validateInputs = () => {
     const formErrors = {};
     const { branch, semester, subject } = this.state;
 
@@ -59,13 +59,24 @@ class Notes extends Component {
       if (!semester) formErrors.semester = 'Please select semester';
       if (!subject) formErrors.subject = 'Please select subject';
       this.setState({ formErrors });
-    } else {
+      return false;
+    }
+
+    return true;
+  };
+
+  getNotes = async () => {
+    const { branch, semester, subject } = this.state;
+    const { updateRecentNotes } = this.props;
+
+    if (this.validateInputs()) {
       this.setState({ loading: true, formErrors: {}, error: null });
+
       const res = await getNotesFromServer(subject);
       const data = res;
       const { success } = res;
+
       if (success) {
-        const { updateRecentNotes } = this.props;
         updateRecentNotes({ branch, semester, subject, notesData: data });
         this.setState({ loading: false, notesData: data });
       } else {
