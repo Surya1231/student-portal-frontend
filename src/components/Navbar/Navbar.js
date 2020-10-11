@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/scss/navbar.scss';
+import Login from '../Auth/Login';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -120,6 +121,10 @@ export default class Navbar extends Component {
                     </a>
                   </div>
                 </li>
+              </ul>
+
+              <ul className="nav navbar-nav ml-auto">
+                <Login />
               </ul>
             </div>
           </nav>
