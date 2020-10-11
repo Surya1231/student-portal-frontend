@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
+import { ErrorMessage } from '../common/Common';
 import NotesBox from './NotesBox';
 
 class NotesDisplay extends Component {
@@ -50,7 +51,7 @@ class NotesDisplay extends Component {
           <div className="row">
             {a.map(() => (
               <div className="col-lg-3 col-md-4 col-sm-6 px-0 py-0">
-                <NotesBox />
+                <NotesBox type="success" />
               </div>
             ))}
           </div>
@@ -63,9 +64,9 @@ class NotesDisplay extends Component {
         </h4>
         <hr />
         {showImportantLinks && (
-          <div className="">
-            <div className="px-4 text-center py-3 text-danger font-weight-bold border border-danger">
-              <h6>Nothing Availabe Here !! Please Contribute to help others </h6>
+          <div className="px-3">
+            <div className="mx-auto" style={{ maxWidth: '400px' }}>
+              <ErrorMessage message="Nothing Available Here! please Contribute" />
             </div>
           </div>
         )}

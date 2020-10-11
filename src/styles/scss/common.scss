@@ -1,5 +1,9 @@
 @import './global.scss';
 
+body {
+  overflow-y: scroll;
+}
+
 .row {
   margin: 0px;
   padding: 0px;

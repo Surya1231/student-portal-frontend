@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 
-export default function NotesBox() {
+export default function NotesBox({ type = 'info' }) {
   return (
     <div className="notes-box px-3 py-3">
-      <div className="border border-primary rounded px-2 py-3 shadow-sm text-center">
+      <div
+        className={`border border-${type} rounded px-2 py-3 shadow-sm text-center alert alert-${type}`}
+      >
         <b> Thermodyanmics and Oil Petrol </b>
         <br />
         <a href="#"> Download </a>

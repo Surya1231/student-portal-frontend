@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getNotesFromServer } from '../../server/server';
-import { updateRecentNotes } from '../../store/actions/notesAction';
+import { resetRecentNotes, updateRecentNotes } from '../../store/actions/notesAction';
 import { LoadingFadeIn } from '../common/Loading';
 import NotesDisplay from './NotesDisplay';
 import NotesForm from './NotesForm';
@@ -34,6 +34,20 @@ class Notes extends Component {
       this.setState({
         [event.target.name]: event.target.value,
       });
+  };
+
+  resetNotes = () => {
+    const { resetRecentNotes } = this.props;
+    this.setState({
+      error: null,
+      loading: false,
+      branch: '',
+      semester: '',
+      subject: '',
+      notesData: null,
+      formErrors: {},
+    });
+    resetRecentNotes();
   };
 
   getNotes = async () => {
@@ -70,6 +84,10 @@ class Notes extends Component {
       <div className="notes">
         <div className="row">
           <div className="col-md-3 px-4 py-3">
+            <button type="submit" className="btn btn-success">
+              Contribute
+            </button>
+            <hr />
             <NotesForm
               branch={branch}
               semester={semester}
@@ -77,8 +95,10 @@ class Notes extends Component {
               formErrors={formErrors}
               onInputChange={this.onInputChange}
               onSubmit={this.getNotes}
+              reset={this.resetNotes}
               disabled={loading}
             />
+            <hr />
           </div>
           <div className="col-md-9 height-rscreen border-left">
             {!notesData && !loading && !error && 'Initial Stage'}
@@ -102,6 +122,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   updateRecentNotes: (payload) => dispatch(updateRecentNotes(payload)),
+  resetRecentNotes: () => dispatch(resetRecentNotes()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Notes);

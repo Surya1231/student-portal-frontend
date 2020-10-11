@@ -19,11 +19,9 @@ class NotesForm extends Component {
   render() {
     const { branchNames, branchCodes, semesters, subjects, formErrors } = this.props;
     const { branch, semester, subject, disabled } = this.props;
-    const { onInputChange } = this.props;
+    const { onInputChange, reset } = this.props;
     return (
       <div>
-        <h5 className="text-primary"> ONE STOP PORTAL FOR NOTES </h5>
-        <br />
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label htmlFor="course">Course</label>
@@ -99,14 +97,15 @@ class NotesForm extends Component {
               <span className="form-error">{formErrors.subject}</span>
             )}
           </div>
-          <br />
-          <button type="submit" className="btn btn-primary" disabled={disabled}>
-            Submit
-          </button>
+          <div className="form-group pt-2">
+            <button type="submit" className="btn btn-primary" disabled={disabled}>
+              Submit
+            </button>
 
-          <button type="button" className="btn btn-success ml-3">
-            Contribute !
-          </button>
+            <button type="button" className="btn btn-danger ml-3" onClick={reset}>
+              Reset
+            </button>
+          </div>
         </form>
       </div>
     );
