@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/scss/navbar.scss';
-import Login from '../Auth/Login';
+import Auth from '../Auth/Auth';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -124,7 +124,9 @@ export default class Navbar extends Component {
               </ul>
 
               <ul className="nav navbar-nav ml-auto">
-                <Login />
+                <li className="nav-item">
+                  <Auth />
+                </li>
               </ul>
             </div>
           </nav>
