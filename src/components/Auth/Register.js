@@ -8,9 +8,12 @@ const initialState = {
   collegeId: '',
   password: '',
   confirmPassword: '',
+  otp: '',
+  otpSent: false,
   error: '',
   success: '',
   loading: '',
+  formErrors: {},
 };
 
 class Register extends Component {
@@ -32,73 +35,132 @@ class Register extends Component {
     });
   };
 
+  sendOtp = () => {
+    this.setState({ otpSent: true, loading: false, success: 'Otp sent successfully' });
+  };
+
+  validateData = () => {
+    const { password, confirmPassword } = this.state;
+    if (password !== confirmPassword) {
+      this.setState({
+        formErrors: { confirmPassword: "Confirm password didn't matched to password" },
+      });
+      return false;
+    }
+    return true;
+  };
+
+  verifyOtp = () => {};
+
   onSubmit = (e) => {
     e.preventDefault();
-    this.setState({ loading: true, success: 'Successfully registered' });
+    if (this.validateData()) {
+      const { otpSent } = this.state;
+      this.setState({ loading: true, success: '', error: '', formErrors: {} });
+      if (!otpSent) this.sendOtp();
+      else this.verifyOtp();
+    }
   };
 
   render() {
-    const { fullName, collegeId, password, confirmPassword, error, success, loading } = this.state;
+    const { fullName, collegeId, password, confirmPassword } = this.state;
+    const { otp, otpSent } = this.state;
+    const { formErrors, error, success, loading } = this.state;
     return (
       <div>
         {success && <SuccessMessage message={success} />}
         {error && <ErrorMessage message={error} />}
 
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
-            <input
-              type="text"
-              name="fullName"
-              value={fullName}
-              onChange={this.handleChange}
-              className="form-control"
-              placeholder="Enter your full Name"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="collgeId">CollegeId</label>
-            <input
-              type="text"
-              name="collegeId"
-              value={collegeId}
-              onChange={this.handleChange}
-              className="form-control"
-              placeholder="Enter Your college Id (2017UBBXXXX)"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="collgeId">Password </label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-              className="form-control"
-              placeholder="Enter Password"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="collgeId">Confirm password</label>
-            <input
-              type="text"
-              name="confirmPassword"
-              value={confirmPassword}
-              onChange={this.handleChange}
-              className="form-control"
-              placeholder="Enter confirm password"
-              required
-            />
-          </div>
-          <div className="form-group mb-0 pt-2">
-            <button type="submit" className="btn btn-info px-4" disabled={loading}>
-              Register
-            </button>
-          </div>
-        </form>
+        {!otpSent ? (
+          <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <label htmlFor="fullName">Full Name</label>
+              <input
+                type="text"
+                name="fullName"
+                value={fullName}
+                onChange={this.handleChange}
+                className="form-control"
+                placeholder="Enter your full Name"
+                required
+              />
+              {formErrors && formErrors.fullName && (
+                <span className="form-error">{formErrors.fullName}</span>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="collgeId">CollegeId</label>
+              <input
+                type="text"
+                name="collegeId"
+                value={collegeId}
+                onChange={this.handleChange}
+                className="form-control"
+                placeholder="Enter Your college Id (2017UBBXXXX)"
+                required
+              />
+              {formErrors && formErrors.collgeId && (
+                <span className="form-error">{formErrors.collegeId}</span>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="collgeId">Password </label>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+                className="form-control"
+                placeholder="Enter Password"
+                required
+              />
+              {formErrors && formErrors.password && (
+                <span className="form-error">{formErrors.password}</span>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="collgeId">Confirm password</label>
+              <input
+                type="text"
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={this.handleChange}
+                className="form-control"
+                placeholder="Enter confirm password"
+                required
+              />
+              {formErrors && formErrors.confirmPassword && (
+                <span className="form-error">{formErrors.confirmPassword}</span>
+              )}
+            </div>
+            <div className="form-group mb-0 pt-2">
+              <button type="submit" className="btn btn-info px-4" disabled={loading}>
+                Register
+              </button>
+            </div>
+          </form>
+        ) : (
+          <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <label htmlFor="otp">Otp</label>
+              <input
+                type="text"
+                name="otp"
+                value={otp}
+                onChange={this.handleChange}
+                className="form-control"
+                placeholder="Enter Otp sent over Email"
+                required
+              />
+              {formErrors && formErrors.otp && <span className="form-error">{formErrors.otp}</span>}
+            </div>
+            <div className="form-group mb-0 pt-2">
+              <button type="submit" className="btn btn-info px-4" disabled={loading}>
+                Enter Otp
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     );
   }
