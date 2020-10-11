@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import { getNotesFromServer } from '../../server/server';
 import { resetRecentNotes, updateRecentNotes } from '../../store/actions/notesAction';
 import { LoadingFadeIn } from '../common/Loading';
+import NotesContribute from './NotesContribute';
 import NotesDisplay from './NotesDisplay';
 import NotesForm from './NotesForm';
+import NotesInitial from './NotesInitial';
 
 class Notes extends Component {
   constructor(props) {
@@ -96,9 +98,7 @@ class Notes extends Component {
       <div className="notes">
         <div className="row">
           <div className="col-md-3 px-4 py-3">
-            <button type="submit" className="btn btn-success">
-              Contribute
-            </button>
+            <NotesContribute />
             <hr />
             <NotesForm
               branch={branch}
@@ -113,7 +113,7 @@ class Notes extends Component {
             <hr />
           </div>
           <div className="col-md-9 height-rscreen border-left bg-light">
-            {!notesData && !loading && !error && 'Initial Stage'}
+            {!notesData && !loading && !error && <NotesInitial />}
             {loading && (
               <div className="pos-center">
                 <LoadingFadeIn />

@@ -72,7 +72,7 @@ class NotesDisplay extends Component {
                 <FcPlus />
               )}
             </span>
-            Last year Questions
+            Last year question papers
           </div>
           {showLastYearQuestions && (
             <div className="row">
@@ -100,7 +100,7 @@ class NotesDisplay extends Component {
                 <FcPlus />
               )}
             </span>
-            Important Links
+            Important links
           </div>
           {showImportantLinks && (
             <div className="px-3 pt-3">

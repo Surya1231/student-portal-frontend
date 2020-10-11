@@ -6,11 +6,5 @@ export const ErrorMessage = ({ message }) => {
 };
 
 export const SuccessMessage = ({ message }) => {
-  return (
-    <div className="alert alert-success">
-      <b> x </b>
-      {message}
-      <b> x </b>
-    </div>
-  );
+  return <div className="alert alert-success">{message}</div>;
 };

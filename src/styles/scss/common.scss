@@ -1,7 +1,15 @@
 @import './global.scss';
 
+// Common Fixes
+
 body {
   overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.no-scroll {
+  height: 100vh;
+  overflow-y: hidden;
 }
 
 .row {
@@ -10,12 +18,11 @@ body {
 }
 
 .form-error {
-  color: rgb(199, 23, 23);
+  color: #e90909;
   font-style: italic;
   font-size: small;
 }
 
-// Set the height of element ot remaining screen except navbar
 .height-rscreen {
   min-height: 92vh;
 }
@@ -45,11 +52,16 @@ button:disabled {
   transform: translate(-50%, -50%);
 }
 
+// Modal CSS
+
+.modal-dialog {
+}
+
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0%;
-  left: 0;
-  width: 100%;
+  left: 0%;
+  width: 100vw;
   height: 100vh;
   background-color: black;
   opacity: 0.5;
