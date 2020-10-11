@@ -73,7 +73,7 @@ class Auth extends Component {
           show={forgotPasswordModal}
           handleClose={() => this.closeModal('forgotPasswordModal')}
         >
-          <ForgotPassword openModal={this.openModal} />
+          <ForgotPassword show={forgotPasswordModal} />
           <div className="forgot-password-footer w-100">
             <a href="#" onClick={() => this.openModal('loginModal')}>
               Login
