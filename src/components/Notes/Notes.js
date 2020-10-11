@@ -53,6 +53,7 @@ class Notes extends Component {
   getNotes = async () => {
     const formErrors = {};
     const { branch, semester, subject } = this.state;
+
     if (!branch || !semester || !subject) {
       if (!branch) formErrors.branch = 'Please select branch';
       if (!semester) formErrors.semester = 'Please select semester';

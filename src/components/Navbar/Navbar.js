@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
@@ -15,7 +16,7 @@ export default class Navbar extends Component {
   }
 
   render() {
-    const pathname = '/about';
+    const { pathname } = this.props;
     return (
       <>
         <div className="d-md-block navbar-custom navbar-desktop">
@@ -36,17 +37,17 @@ export default class Navbar extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav">
-                <li className="nav-item active">
+                <li className={`nav-item ${pathname === '/' ? 'active' : ''}`}>
                   <Link className="nav-link" to="/">
                     Home
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className={`nav-item ${pathname.indexOf('/notes') !== -1 ? 'active' : ''}`}>
                   <Link className="nav-link" to="/notes">
                     Notes
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className={`nav-item ${pathname.indexOf('/buysell') !== -1 ? 'active' : ''}`}>
                   <Link className="nav-link" to="/buysell">
                     Buy/Sell
                   </Link>

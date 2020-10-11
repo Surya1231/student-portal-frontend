@@ -2,13 +2,7 @@
 import React from 'react';
 
 export const ErrorMessage = ({ message }) => {
-  return (
-    <div className="alert alert-danger">
-      <b className="h5"> x </b>
-      {message}
-      <b className="h5"> x </b>
-    </div>
-  );
+  return <div className="alert alert-danger">{message}</div>;
 };
 
 export const SuccessMessage = ({ message }) => {

@@ -7,9 +7,11 @@ import Notes from './components/Notes/Notes';
 
 class App extends Component {
   render() {
+    const { location } = this.props;
+    const { pathname } = location;
     return (
       <div className="App">
-        <Navbar />
+        <Navbar pathname={pathname} />
 
         <Switch>
           <Route exact path="/notes" component={Notes} />

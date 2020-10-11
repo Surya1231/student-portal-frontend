@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/destructuring-assignment */
@@ -26,50 +27,64 @@ class NotesDisplay extends Component {
     return (
       <div className="notes-display">
         <h3 className="text-center text-primary pt-2"> ECT 303 </h3>
-        <h4 className="cursor-pointer" onClick={() => this.toggle('showNotes')}>
-          Notes
-          <span className="float-right">{showNotes ? '^' : 'D'}</span>
-        </h4>
         <hr />
-        {showNotes && (
-          <div className="row">
-            {a.map(() => (
-              <div className="col-lg-3 col-md-4 col-sm-6 px-0 py-0">
-                <NotesBox />
-              </div>
-            ))}
-          </div>
-        )}
-        <br />
 
-        <h4 className="cursor-pointer" onClick={() => this.toggle('showLastYearQuestions')}>
-          Last year Question papers
-          <span className="float-right">{showLastYearQuestions ? '^' : 'D'}</span>
-        </h4>
-        <hr />
-        {showLastYearQuestions && (
-          <div className="row">
-            {a.map(() => (
-              <div className="col-lg-3 col-md-4 col-sm-6 px-0 py-0">
-                <NotesBox type="success" />
-              </div>
-            ))}
+        <div className="section">
+          <div
+            className="h4 border-bottom py-2 cursor-pointer"
+            onClick={() => this.toggle('showNotes')}
+          >
+            <span className="float-right">{showNotes ? '^' : 'D'}</span>
+            Notes
           </div>
-        )}
-        <br />
-
-        <h4 className="cursor-pointer" onClick={() => this.toggle('showImportantLinks')}>
-          Important Links
-          <span className="float-right">{showImportantLinks ? '^' : 'D'}</span>
-        </h4>
-        <hr />
-        {showImportantLinks && (
-          <div className="px-3">
-            <div className="mx-auto" style={{ maxWidth: '400px' }}>
-              <ErrorMessage message="Nothing Available Here! please Contribute" />
+          {showNotes && (
+            <div className="row">
+              {a.map(() => (
+                <div className="col-lg-3 col-md-4 col-sm-6 px-0 py-0">
+                  <NotesBox />
+                </div>
+              ))}
             </div>
+          )}
+        </div>
+        <br />
+
+        <div className="section">
+          <div
+            className="h4 border-bottom py-2 cursor-pointer"
+            onClick={() => this.toggle('showLastYearQuestions')}
+          >
+            <span className="float-right">{showLastYearQuestions ? '^' : 'D'}</span>
+            Last year Questions
           </div>
-        )}
+          {showLastYearQuestions && (
+            <div className="row">
+              {a.map(() => (
+                <div className="col-lg-3 col-md-4 col-sm-6 px-0 py-0">
+                  <NotesBox type="success" />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <br />
+
+        <div className="section">
+          <div
+            className="h4 border-bottom py-2 cursor-pointer"
+            onClick={() => this.toggle('showImportantLinks')}
+          >
+            <span className="float-right">{showImportantLinks ? '^' : 'D'}</span>
+            Important Links
+          </div>
+          {showImportantLinks && (
+            <div className="px-3 pt-3">
+              <div className="mx-auto" style={{ maxWidth: '400px' }}>
+                <ErrorMessage message="Nothing Available Here! please Contribute" />
+              </div>
+            </div>
+          )}
+        </div>
         <br />
       </div>
     );

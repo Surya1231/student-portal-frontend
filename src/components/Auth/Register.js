@@ -35,10 +35,6 @@ class Register extends Component {
     });
   };
 
-  sendOtp = () => {
-    this.setState({ otpSent: true, loading: false, success: 'Otp sent successfully' });
-  };
-
   validateData = () => {
     const { password, confirmPassword } = this.state;
     if (password !== confirmPassword) {
@@ -48,6 +44,10 @@ class Register extends Component {
       return false;
     }
     return true;
+  };
+
+  sendOtp = () => {
+    this.setState({ otpSent: true, loading: false, success: 'Otp sent successfully' });
   };
 
   verifyOtp = () => {};
@@ -156,7 +156,7 @@ class Register extends Component {
             </div>
             <div className="form-group mb-0 pt-2">
               <button type="submit" className="btn btn-info px-4" disabled={loading}>
-                Enter Otp
+                Verify Otp
               </button>
             </div>
           </form>
