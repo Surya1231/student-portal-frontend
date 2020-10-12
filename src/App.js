@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import About from './components/About/About';
 import { FullScreenError } from './components/common/Error';
 import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
@@ -15,6 +16,7 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/notes" component={Notes} />
+          <Route exact path="/about" component={About} />
           <Route component={FullScreenError} />
         </Switch>
 

@@ -99,28 +99,10 @@ export default class Navbar extends Component {
                     </a>
                   </div>
                 </li>
-                <li className="nav-item dropdown">
-                  <a
-                    className="nav-link dropdown-toggle"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
+                <li className={`nav-item ${pathname.indexOf('/about') !== -1 ? 'active' : ''}`}>
+                  <Link className="nav-link" to="/about">
                     About
-                  </a>
-                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a className="dropdown-item" href="#">
-                      Developers
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Contributors
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Github Repo
-                    </a>
-                  </div>
+                  </Link>
                 </li>
               </ul>
 

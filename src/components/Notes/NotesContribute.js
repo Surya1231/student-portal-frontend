@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ErrorMessage, SuccessMessage } from '../common/Common';
-import Modal from '../Modals/Modal';
+import Modal from '../common/Modal';
 
 class NotesContribute extends Component {
   constructor(props) {

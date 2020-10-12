@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React, { Component } from 'react';
-import Modal from '../Modals/Modal';
+import Modal from '../common/Modal';
 import '../../styles/scss/auth.scss';
 import Login from './Login';
 import Register from './Register';
