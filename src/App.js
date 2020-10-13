@@ -5,6 +5,7 @@ import { FullScreenError } from './components/common/Error';
 import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
 import Notes from './components/Notes/Notes';
+import BuySell from './components/BuySell/BuySell';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/notes" component={Notes} />
           <Route exact path="/about" component={About} />
+          <Route exact path="/buysell" component={BuySell} />
           <Route component={FullScreenError} />
         </Switch>
 
