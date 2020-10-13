@@ -6,23 +6,25 @@ import { connect } from 'react-redux';
 import { ErrorMessage, SuccessMessage } from '../common/Common';
 import Modal from '../common/Modal';
 
+const initialState = {
+  showModal: false,
+  name: '',
+  category: '',
+  image: '',
+  quotedPrice: '',
+  timeUsed: '',
+  otherDetails: '',
+  formErrors: {},
+  error: null,
+  loading: false,
+  success: null,
+};
+
 class SellItem extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      showModal: false,
-      name: '',
-      category: '',
-      image: '',
-      quotedPrice: '',
-      timeUsed: '',
-      otherDetails: '',
-      formErrors: {},
-      error: null,
-      loading: false,
-      success: null,
-    };
+    this.state = initialState;
   }
 
   handleChange = (event) => {
@@ -35,17 +37,8 @@ class SellItem extends Component {
   toggleModal = () => {
     const { showModal } = this.state;
     this.setState({
+      ...initialState,
       showModal: !showModal,
-      name: '',
-      category: '',
-      image: '',
-      quotedPrice: '',
-      timeUsed: '',
-      otherDetails: '',
-      formErrors: {},
-      error: null,
-      loading: false,
-      success: null,
     });
   };
 
@@ -91,7 +84,7 @@ class SellItem extends Component {
                   type="text"
                   name="name"
                   value={name}
-                  placeholder="Cooler"
+                  placeholder="Enter your product name"
                   className="form-control"
                   onChange={this.handleChange}
                 />
@@ -139,7 +132,7 @@ class SellItem extends Component {
                   type="text"
                   name="quotedPrice"
                   value={quotedPrice}
-                  placeholder="Rs.3000"
+                  placeholder="Enter your price (Rs 3000)"
                   className="form-control"
                   onChange={this.handleChange}
                 />
@@ -153,7 +146,7 @@ class SellItem extends Component {
                   type="text"
                   name="timeUsed"
                   value={timeUsed}
-                  placeholder="6 months"
+                  placeholder="Enter time used (6 months)"
                   className="form-control"
                   onChange={this.handleChange}
                 />
@@ -168,6 +161,7 @@ class SellItem extends Component {
                   name="otherDetails"
                   value={otherDetails}
                   className="form-control"
+                  placeholder="Enter other details"
                   onChange={this.handleChange}
                 />
               </div>
@@ -179,7 +173,7 @@ class SellItem extends Component {
               </div>
             </form>
           </div>
-          <div className="sell-footer w-100">MNIT OLX pe Bech De!!!!</div>
+          <div className="sell-footer w-100">MNIT ka olx !</div>
         </Modal>
       </div>
     );

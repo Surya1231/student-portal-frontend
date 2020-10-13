@@ -10,9 +10,10 @@ class ItemBox extends Component {
   }
 
   render() {
-    const { name, category, quotedPrice, image, timeUsed, otherDetails } = this.props;
-    const { seller, sellerContact, postedOn } = this.props;
+    const { item } = this.props;
     const { openModal } = this.props;
+    const { name, category, quotedPrice, image, timeUsed, postedOn } = item;
+
     return (
       <div>
         <div className="px-3 py-3 w-100 h-25">
@@ -34,20 +35,7 @@ class ItemBox extends Component {
                 <button
                   type="button"
                   className="btn btn-sm btn-info"
-                  onClick={() =>
-                    openModal(
-                      'moreInfoModal',
-                      name,
-                      category,
-                      quotedPrice,
-                      image,
-                      timeUsed,
-                      otherDetails,
-                      seller,
-                      sellerContact,
-                      postedOn,
-                    )
-                  }
+                  onClick={() => openModal('moreInfoModal', item)}
                 >
                   More Info
                 </button>
@@ -55,7 +43,7 @@ class ItemBox extends Component {
                 <button
                   type="button"
                   className="btn btn-sm btn-success ml-3"
-                  onClick={() => openModal('buyModal')}
+                  onClick={() => openModal('buyModal', item)}
                 >
                   Buy
                 </button>

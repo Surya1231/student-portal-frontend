@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import ItemBox from './ItemBox';
 import Modal from '../common/Modal';
@@ -10,86 +11,46 @@ class ItemsDisplay extends Component {
     this.state = {
       moreInfoModal: false,
       buyModal: false,
-      name: '',
-      category: '',
-      quotedPrice: '',
-      image: '',
-      timeUsed: '',
-      otherDetails: '',
-      seller: '',
-      sellerContact: '',
-      postedOn: '',
+      modalInfo: {},
     };
   }
 
-  openModal = (
-    modal,
-    name,
-    category,
-    quotedPrice,
-    image,
-    timeUsed,
-    otherDetails,
-    seller,
-    sellerContact,
-    postedOn,
-  ) => {
+  openModal = (modal, modalInfo) => {
     this.setState({
       [modal]: true,
-      name,
-      category,
-      quotedPrice,
-      image,
-      timeUsed,
-      otherDetails,
-      seller,
-      sellerContact,
-      postedOn,
+      modalInfo,
     });
   };
 
   closeModal = (modal) => {
     this.setState({
       [modal]: false,
-      name: '',
-      category: '',
-      quotedPrice: '',
-      image: '',
-      timeUsed: '',
-      otherDetails: '',
-      seller: '',
-      sellerContact: '',
-      postedOn: '',
+      modalInfo: {},
     });
   };
 
   render() {
-    const { name, category, quotedPrice, image, timeUsed, otherDetails } = this.state;
-    const { seller, sellerContact, postedOn } = this.state;
-    const { moreInfoModal, buyModal } = this.state;
-    const a = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const { moreInfoModal, buyModal, modalInfo } = this.state;
+    const { data, filters } = this.props;
+    let { search } = this.props;
+    search = search.toLowerCase();
     return (
       <div>
         <div className="item-display">
           <h3 className="text-center text-primary pt-2">Items on Sale Currently</h3>
           <hr />
           <div className="card-columns">
-            {a.map((i) => (
-              <div key={i} className="">
-                <ItemBox
-                  name="Cooler"
-                  category="Electronics"
-                  quotedPrice="3000"
-                  timeUsed="6 months"
-                  image="https://tiimg.tistatic.com/fp/1/006/244/single-phase-desert-air-cooler-095.jpg"
-                  otherDetails="Very good working condition........"
-                  postedOn="12/10/20"
-                  seller="Dhruv Golani"
-                  sellerContact="99999999"
-                  openModal={this.openModal}
-                />
-              </div>
-            ))}
+            {data.map((item) => {
+              const { name, category } = item;
+              if (name.toLowerCase().indexOf(search) !== -1 && filters.category[category]) {
+                return (
+                  <div key={name}>
+                    <ItemBox item={item} openModal={this.openModal} />
+                  </div>
+                );
+              }
+              return <React.Fragment key={name}> </React.Fragment>;
+            })}
           </div>
         </div>
 
@@ -100,30 +61,30 @@ class ItemsDisplay extends Component {
         >
           <div>
             <p>
-              <b>Name</b> : {name}{' '}
+              <b>Name</b> : {modalInfo.name}
             </p>
             <p>
-              <b>Category</b> : {category}{' '}
+              <b>Category</b> : {modalInfo.category}
             </p>
             <p>
-              <b>Quoted Price</b> : {quotedPrice}{' '}
+              <b>Quoted Price</b> : {modalInfo.quotedPrice}
             </p>
             <p>
-              <b>Time Used</b> : {timeUsed}{' '}
+              <b>Time Used</b> : {modalInfo.timeUsed}
             </p>
             <p>
-              <b>Additional Info</b> : {otherDetails}{' '}
+              <b>Additional Info</b> : {modalInfo.otherDetails}
             </p>
             <p>
-              <b>Seller</b> : {seller}{' '}
+              <b>Seller</b> : {modalInfo.seller}
             </p>
             <p>
-              <b>Seller Contact Number</b> : {sellerContact}{' '}
+              <b>Seller Contact Number</b> : {modalInfo.sellerContact}
             </p>
             <p>
-              <b>Posted On</b> : {postedOn}{' '}
+              <b>Posted On</b> : {modalInfo.postedOn}
             </p>
-            <img src={image} alt="Item" />
+            <img src={modalInfo.image} alt="Item" />
           </div>
           <div className="sell-footer w-100">Contact Seller for more info.</div>
         </Modal>

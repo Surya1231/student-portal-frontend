@@ -1,27 +1,22 @@
 export const itemCategories = [
   {
-    name: 'all',
-    key: 'all',
-    label: 'All',
+    name: 'Electronics',
+    key: 'Electronics',
+    label: 'Electronics',
   },
   {
-    name: 'electronics',
-    key: 'electronics',
-    label: 'Electronic Items',
-  },
-  {
-    name: 'books',
-    key: 'books',
+    name: 'Books',
+    key: 'Books',
     label: 'Books',
   },
   {
-    name: 'wooden-items',
-    key: 'wooden-items',
+    name: 'Wooden-Items',
+    key: 'Wooden-items',
     label: 'Wooden Items',
   },
   {
-    name: 'other',
-    key: 'other',
+    name: 'Other',
+    key: 'Other',
     label: 'Other',
   },
 ];
