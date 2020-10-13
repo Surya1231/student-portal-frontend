@@ -18,3 +18,11 @@ export const getNotesFromServer = async (subjectCode) => {
     }, 5000),
   );
 };
+
+export const getItemsFromServer = async (searchItem, checkedItems) => {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve({ success: true, items: [searchItem, checkedItems] });
+    }, 2000),
+  );
+};
