@@ -43,46 +43,52 @@ class Auth extends Component {
           Login
         </a>
 
-        <Modal title="Login" show={loginModal} handleClose={() => this.closeModal('loginModal')}>
-          <Login show={loginModal} />
-          <div className="login-footer w-100">
-            <a href="#" onClick={() => this.openModal('forgotPasswordModal')}>
-              Forgot password ?
-            </a>
-            <a href="#" className="float-right" onClick={() => this.openModal('registerModal')}>
-              New user? Register Here
-            </a>
-          </div>
-        </Modal>
+        {loginModal && (
+          <Modal title="Login" show={loginModal} handleClose={() => this.closeModal('loginModal')}>
+            <Login show={loginModal} />
+            <div className="login-footer w-100">
+              <a href="#" onClick={() => this.openModal('forgotPasswordModal')}>
+                Forgot password ?
+              </a>
+              <a href="#" className="float-right" onClick={() => this.openModal('registerModal')}>
+                New user? Register Here
+              </a>
+            </div>
+          </Modal>
+        )}
 
-        <Modal
-          title="Register"
-          show={registerModal}
-          handleClose={() => this.closeModal('registerModal')}
-        >
-          <Register show={registerModal} />
-          <div className="register-footer w-100">
-            <a href="#" className="float-right" onClick={() => this.openModal('loginModal')}>
-              Already Registered? Login Here
-            </a>
-          </div>
-        </Modal>
+        {registerModal && (
+          <Modal
+            title="Register"
+            show={registerModal}
+            handleClose={() => this.closeModal('registerModal')}
+          >
+            <Register show={registerModal} />
+            <div className="register-footer w-100">
+              <a href="#" className="float-right" onClick={() => this.openModal('loginModal')}>
+                Already Registered? Login Here
+              </a>
+            </div>
+          </Modal>
+        )}
 
-        <Modal
-          title="Forgot Password"
-          show={forgotPasswordModal}
-          handleClose={() => this.closeModal('forgotPasswordModal')}
-        >
-          <ForgotPassword show={forgotPasswordModal} />
-          <div className="forgot-password-footer w-100">
-            <a href="#" onClick={() => this.openModal('loginModal')}>
-              Login
-            </a>
-            <a href="#" className="float-right" onClick={() => this.openModal('registerModal')}>
-              Register
-            </a>
-          </div>
-        </Modal>
+        {forgotPasswordModal && (
+          <Modal
+            title="Forgot Password"
+            show={forgotPasswordModal}
+            handleClose={() => this.closeModal('forgotPasswordModal')}
+          >
+            <ForgotPassword show={forgotPasswordModal} />
+            <div className="forgot-password-footer w-100">
+              <a href="#" onClick={() => this.openModal('loginModal')}>
+                Login
+              </a>
+              <a href="#" className="float-right" onClick={() => this.openModal('registerModal')}>
+                Register
+              </a>
+            </div>
+          </Modal>
+        )}
       </div>
     );
   }
