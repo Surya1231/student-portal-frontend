@@ -1,15 +1,28 @@
 // all functions for communicating with server/
-import Axios from 'axios';
+import axios from 'axios';
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
+const API_BASE_USER_URL = 'http://localhost:8080/api/user';
 
 export const sendUserOtp = async (user) => {
-  const url = `${apiUrl}/sendUserOtp`;
-  const res = await Axios.post(url, { user });
-  return res;
+  const url = `${API_BASE_USER_URL}/register`;
+  const response = await axios.post(url, user);
+  console.log(response.data);
+  return response.data;
 };
 
-export const login = async () => {};
+export const verifyUserOtp = async (otpData) => {
+  const url = `${API_BASE_USER_URL}/verifyOtp`;
+  const response = await axios.post(url, otpData);
+  console.log(response.data);
+  return response.data;
+};
+
+export const userLogin = async (credentials) => {
+  const url = `${API_BASE_USER_URL}/login`;
+  const response = await axios.post(url, credentials);
+  console.log(response.data);
+  return response.data;
+};
 
 export const getNotesFromServer = async (subjectCode) => {
   return new Promise((resolve) =>

@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import { ErrorMessage, SuccessMessage } from '../common/Common';
+
+import { sendUserOtp, verifyUserOtp } from '../../server/server';
 
 const initialState = {
   fullName: '',
@@ -10,6 +13,7 @@ const initialState = {
   confirmPassword: '',
   otp: '',
   otpSent: false,
+  otpVerified: false,
   error: '',
   success: '',
   loading: '',
@@ -46,11 +50,38 @@ class Register extends Component {
     return true;
   };
 
-  sendOtp = () => {
-    this.setState({ otpSent: true, loading: false, success: 'Otp sent successfully' });
+  sendOtp = async () => {
+    const { fullName, collegeId, password } = this.state;
+    const user = {
+      fullName,
+      collegeId,
+      password,
+    };
+    const response = await sendUserOtp(user);
+    if (response.success) {
+      this.setState({
+        otpSent: true,
+        loading: false,
+        success: 'Otp sent successfully. Check your email.',
+      });
+    } else {
+      this.setState({ loading: false, error: response.error });
+    }
   };
 
-  verifyOtp = () => {};
+  verifyOtp = async () => {
+    const { collegeId, otp } = this.state;
+    const otpData = {
+      collegeId,
+      otp,
+    };
+    const response = await verifyUserOtp(otpData);
+    if (response.success) {
+      this.setState({ otpVerified: true, loading: false, success: 'OTP verified! Login now!' });
+    } else {
+      this.setState({ loading: false, error: response.error });
+    }
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -64,14 +95,16 @@ class Register extends Component {
 
   render() {
     const { fullName, collegeId, password, confirmPassword } = this.state;
-    const { otp, otpSent } = this.state;
+    const { otp, otpSent, otpVerified } = this.state;
     const { formErrors, error, success, loading } = this.state;
     return (
       <div>
-        {success && <SuccessMessage message={success} />}
-        {error && <ErrorMessage message={error} />}
+        {!otpVerified && success && <SuccessMessage message={success} />}
+        {!otpVerified && error && <ErrorMessage message={error} />}
 
-        {!otpSent ? (
+        {otpVerified ? (
+          <SuccessMessage message={success} />
+        ) : !otpSent ? (
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label htmlFor="fullName">Full Name</label>
