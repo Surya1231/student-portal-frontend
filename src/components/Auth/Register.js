@@ -58,7 +58,7 @@ class Register extends Component {
       password,
     };
     const response = await sendUserOtp(user);
-    if (response.success) {
+    if (response && response.success) {
       this.setState({
         otpSent: true,
         loading: false,
@@ -76,10 +76,13 @@ class Register extends Component {
       otp,
     };
     const response = await verifyUserOtp(otpData);
-    if (response.success) {
-      this.setState({ otpVerified: true, loading: false, success: 'OTP verified! Login now!' });
+    if (response && response.success) {
+      this.setState({ otpVerified: true, loading: false, success: 'Successfully Verified !!' });
     } else {
-      this.setState({ loading: false, error: response.error });
+      this.setState({
+        loading: false,
+        error: response && response.error ? response.error : 'Something went wrong',
+      });
     }
   };
 
@@ -99,12 +102,10 @@ class Register extends Component {
     const { formErrors, error, success, loading } = this.state;
     return (
       <div>
-        {!otpVerified && success && <SuccessMessage message={success} />}
-        {!otpVerified && error && <ErrorMessage message={error} />}
+        {success && <SuccessMessage message={success} />}
+        {error && <ErrorMessage message={error} />}
 
-        {otpVerified ? (
-          <SuccessMessage message={success} />
-        ) : !otpSent ? (
+        {!otpSent ? (
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label htmlFor="fullName">Full Name</label>
@@ -173,26 +174,30 @@ class Register extends Component {
             </div>
           </form>
         ) : (
-          <form onSubmit={this.onSubmit}>
-            <div className="form-group">
-              <label htmlFor="otp">Otp</label>
-              <input
-                type="text"
-                name="otp"
-                value={otp}
-                onChange={this.handleChange}
-                className="form-control"
-                placeholder="Enter Otp sent over Email"
-                required
-              />
-              {formErrors && formErrors.otp && <span className="form-error">{formErrors.otp}</span>}
-            </div>
-            <div className="form-group mb-0 pt-2">
-              <button type="submit" className="btn btn-info px-4" disabled={loading}>
-                Verify Otp
-              </button>
-            </div>
-          </form>
+          !otpVerified && (
+            <form onSubmit={this.onSubmit}>
+              <div className="form-group">
+                <label htmlFor="otp">Otp</label>
+                <input
+                  type="text"
+                  name="otp"
+                  value={otp}
+                  onChange={this.handleChange}
+                  className="form-control"
+                  placeholder="Enter Otp sent over Email"
+                  required
+                />
+                {formErrors && formErrors.otp && (
+                  <span className="form-error">{formErrors.otp}</span>
+                )}
+              </div>
+              <div className="form-group mb-0 pt-2">
+                <button type="submit" className="btn btn-info px-4" disabled={loading}>
+                  Verify Otp
+                </button>
+              </div>
+            </form>
+          )
         )}
       </div>
     );

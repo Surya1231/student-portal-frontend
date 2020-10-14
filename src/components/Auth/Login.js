@@ -37,9 +37,11 @@ class Login extends Component {
       collegeId,
       password,
     };
+    this.setState({ loading: true });
     const response = await userLogin(credentials);
     if (response.success) {
       this.setState({ loading: false, error: '', success: 'Successfully logged in!!' });
+      // TODO : update redux state here with response data
     } else {
       this.setState({ loading: false, error: response.error });
     }

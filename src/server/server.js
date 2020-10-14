@@ -5,16 +5,26 @@ const API_BASE_USER_URL = 'http://localhost:8080/api/user';
 
 export const sendUserOtp = async (user) => {
   const url = `${API_BASE_USER_URL}/register`;
-  const response = await axios.post(url, user);
-  console.log(response.data);
-  return response.data;
+  axios
+    .post(url, user)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return { success: true, error };
+    });
 };
 
 export const verifyUserOtp = async (otpData) => {
   const url = `${API_BASE_USER_URL}/verifyOtp`;
-  const response = await axios.post(url, otpData);
-  console.log(response.data);
-  return response.data;
+  axios
+    .post(url, otpData)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return { success: true, error };
+    });
 };
 
 export const userLogin = async (credentials) => {
