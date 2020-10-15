@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const API_BASE_USER_URL = 'http://localhost:8080/api/user';
 
+const serverErrorMessage = 'Something went wrong on our side!! Please try again later';
+
 export const sendUserOtp = async (user) => {
   const url = `${API_BASE_USER_URL}/register`;
   return new Promise((resolve) => {
@@ -15,7 +17,7 @@ export const sendUserOtp = async (user) => {
         console.log(error);
         resolve({
           success: false,
-          error: 'Somwthing went wrong on our side!! Please try again later',
+          error: serverErrorMessage,
         });
       });
   });
@@ -33,7 +35,7 @@ export const verifyUserOtp = async (otpData) => {
         console.log(error);
         resolve({
           success: false,
-          error: 'Somwthing went wrong on our side!! Please try again later',
+          error: serverErrorMessage,
         });
       });
   });
@@ -41,9 +43,20 @@ export const verifyUserOtp = async (otpData) => {
 
 export const userLogin = async (credentials) => {
   const url = `${API_BASE_USER_URL}/login`;
-  const response = await axios.post(url, credentials);
-  console.log(response.data);
-  return response.data;
+  return new Promise((resolve) => {
+    axios
+      .post(url, credentials)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        resolve({
+          success: false,
+          error: serverErrorMessage,
+        });
+      });
+  });
 };
 
 export const getNotesFromServer = async (subjectCode) => {

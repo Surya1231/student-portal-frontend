@@ -1,8 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
+
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { ErrorMessage, SuccessMessage } from '../common/Common';
 import { userLogin } from '../../server/server';
+import { userLoginAction } from '../../store/actions/userAction';
 
 const initialState = {
   collegeId: '',
@@ -33,15 +36,17 @@ class Login extends Component {
 
   login = async () => {
     const { collegeId, password } = this.state;
-    const credentials = {
-      collegeId,
-      password,
-    };
-    this.setState({ loading: true });
+    const credentials = { collegeId, password };
+
     const response = await userLogin(credentials);
-    if (response.success) {
-      this.setState({ loading: false, error: '', success: 'Successfully logged in!!' });
-      // TODO : update redux state here with response data
+
+    if (response && response.success) {
+      const { userLoginAction } = this.props;
+      const { user, token } = response.data;
+
+      this.setState({ loading: false, error: '', success: 'Successfully logged in!!' }, () =>
+        userLoginAction({ user, token }),
+      );
     } else {
       this.setState({ loading: false, error: response.error });
     }
@@ -49,6 +54,7 @@ class Login extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    this.setState({ loading: true });
     this.login();
   };
 
@@ -100,4 +106,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  userLoginAction: (payload) => dispatch(userLoginAction(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);

@@ -1,10 +1,13 @@
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
-/* eslint-disable no-nested-ternary */
-import React, { Component } from 'react';
-import { ErrorMessage, SuccessMessage } from '../common/Common';
 
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { ErrorMessage, SuccessMessage } from '../common/Common';
 import { sendUserOtp, verifyUserOtp } from '../../server/server';
+import { userLoginAction } from '../../store/actions/userAction';
 
 const initialState = {
   fullName: '',
@@ -39,7 +42,15 @@ class Register extends Component {
     });
   };
 
+  handleError = (response) => {
+    this.setState({
+      loading: false,
+      error: response && response.error ? response.error : 'Something went wrong',
+    });
+  };
+
   validateData = () => {
+    // TODO : add more validators like college id and remove required also
     const { password, confirmPassword } = this.state;
     if (password !== confirmPassword) {
       this.setState({
@@ -52,39 +63,30 @@ class Register extends Component {
 
   sendOtp = async () => {
     const { fullName, collegeId, password } = this.state;
-    const user = {
-      fullName,
-      collegeId,
-      password,
-    };
-    const response = await sendUserOtp(user);
-    console.log(response);
+    const response = await sendUserOtp({ fullName, collegeId, password });
+
     if (response && response.success) {
       this.setState({
         otpSent: true,
         loading: false,
         success: 'Otp sent successfully. Check your email.',
       });
-    } else {
-      this.setState({ loading: false, error: response });
-    }
+    } else this.handleError(response);
   };
 
   verifyOtp = async () => {
     const { collegeId, otp } = this.state;
-    const otpData = {
-      collegeId,
-      otp,
-    };
-    const response = await verifyUserOtp(otpData);
+    const response = await verifyUserOtp({ collegeId, otp });
+
     if (response && response.success) {
-      this.setState({ otpVerified: true, loading: false, success: 'Successfully Verified !!' });
-    } else {
-      this.setState({
-        loading: false,
-        error: response && response.error ? response.error : 'Something went wrong',
-      });
-    }
+      const { userLoginAction } = this.props;
+      const { user, token } = response.data;
+
+      this.setState(
+        { otpVerified: true, loading: false, success: 'Successfully Verified !!' },
+        () => userLoginAction({ user, token }),
+      );
+    } else this.handleError(response);
   };
 
   onSubmit = (e) => {
@@ -205,4 +207,8 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapDispatchToProps = (dispatch) => ({
+  userLoginAction: (payload) => dispatch(userLoginAction(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(Register);
