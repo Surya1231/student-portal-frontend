@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
+import { forgotPassword } from '../../server/server';
 import { ErrorMessage, SuccessMessage } from '../common/Common';
 
 const initialState = {
@@ -29,9 +30,18 @@ class ForgotPassword extends Component {
     });
   };
 
-  onSubmit = (e) => {
+  onSubmit = async (e) => {
     e.preventDefault();
-    this.setState({ loading: true, error: 'Usernmae Not registered', success: '' });
+    const { collegeId } = this.state;
+    this.setState({ loading: true, error: '', success: '' });
+    const response = await forgotPassword(collegeId);
+
+    if (response && response.success)
+      this.setState({
+        loading: true,
+        success: 'A link to reset password successfully sent to you via email.',
+      });
+    else this.setState({ loading: false, error: response.error });
   };
 
   render() {

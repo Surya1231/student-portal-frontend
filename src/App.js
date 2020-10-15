@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
 import Notes from './components/Notes/Notes';
 import BuySell from './components/BuySell/BuySell';
+import PasswordReset from './components/Auth/PasswordReset';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route exact path="/notes" component={Notes} />
           <Route exact path="/about" component={About} />
           <Route exact path="/buysell" component={BuySell} />
+          <Route exact path="/forgotPassword/:token" component={PasswordReset} />
           <Route component={FullScreenError} />
         </Switch>
 

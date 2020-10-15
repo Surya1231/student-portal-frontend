@@ -65,6 +65,9 @@ class Auth extends Component {
           >
             <Register show={registerModal} />
             <div className="register-footer w-100">
+              <a href="#" onClick={() => this.openModal('forgotPasswordModal')}>
+                Forgot password ?
+              </a>
               <a href="#" className="float-right" onClick={() => this.openModal('loginModal')}>
                 Already Registered? Login Here
               </a>
