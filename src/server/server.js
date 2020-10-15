@@ -5,26 +5,38 @@ const API_BASE_USER_URL = 'http://localhost:8080/api/user';
 
 export const sendUserOtp = async (user) => {
   const url = `${API_BASE_USER_URL}/register`;
-  axios
-    .post(url, user)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { success: true, error };
-    });
+  return new Promise((resolve) => {
+    axios
+      .post(url, user)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        resolve({
+          success: false,
+          error: 'Somwthing went wrong on our side!! Please try again later',
+        });
+      });
+  });
 };
 
 export const verifyUserOtp = async (otpData) => {
   const url = `${API_BASE_USER_URL}/verifyOtp`;
-  axios
-    .post(url, otpData)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { success: true, error };
-    });
+  return new Promise((resolve) => {
+    axios
+      .post(url, otpData)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        resolve({
+          success: false,
+          error: 'Somwthing went wrong on our side!! Please try again later',
+        });
+      });
+  });
 };
 
 export const userLogin = async (credentials) => {

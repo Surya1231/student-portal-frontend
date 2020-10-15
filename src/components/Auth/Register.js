@@ -58,6 +58,7 @@ class Register extends Component {
       password,
     };
     const response = await sendUserOtp(user);
+    console.log(response);
     if (response && response.success) {
       this.setState({
         otpSent: true,
@@ -65,7 +66,7 @@ class Register extends Component {
         success: 'Otp sent successfully. Check your email.',
       });
     } else {
-      this.setState({ loading: false, error: response.error });
+      this.setState({ loading: false, error: response });
     }
   };
 
